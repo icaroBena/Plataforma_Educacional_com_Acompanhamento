@@ -7,7 +7,7 @@ public class RelatorioDesempenho {
         double somaPesos = 0;
 
         for (Avaliacao a : turma.getAvaliacoes()) {
-            for (Submissao s : a.getSubmissões()) {
+            for (Submissao s : a.getSubmissoes()) {
                 if (s.getAluno().equals(aluno)) {
                     somaNotas += s.getNota() * a.getPeso();
                     somaPesos += a.getPeso();

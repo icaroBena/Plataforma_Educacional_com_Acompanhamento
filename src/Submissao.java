@@ -47,6 +47,4 @@ public class Submissao {
         this.observacoes = observacoes;
         avaliacao.adicionarSubmissao(this);
     }
-
-    // Getters
 }

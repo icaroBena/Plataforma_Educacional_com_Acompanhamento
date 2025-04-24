@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -68,11 +70,84 @@ public class Main {
         new Submissao(a5, av6, 7, new String("2024, 4, 22"), "Recuperação");
         new Submissao(a1, av6, 10, new String("2024, 4, 22"), "OLAAAAAAAAAAAA");
 
-        // Geração de relatório de desempenho
-        System.out.println("\n📊 Relatório de " + a2.getNome() + " na turma " + turma1.getCodigo());
-        RelatorioDesempenho.gerarRelatorio(a1, turma1);
 
-        System.out.println("\n📊 Relatório de " + a1.getNome() + " na turma " + turma2.getCodigo());
+
+
+
+        // Curso e professores
+        System.out.println("Cursos e Professores:");
+        System.out.println(curso1.getNome() + " - Professor: " + curso1.getProfessor().getNome());
+        System.out.println(curso2.getNome() + " - Professor: " + curso2.getProfessor().getNome());
+
+        //Turmas e curso
+        List<Curso> cursos = new ArrayList<>();
+        cursos.add(curso1);
+        cursos.add(curso2);
+
+        for (Curso curso : cursos) {
+            for (Turma turma : curso.getTurmas()) {
+                System.out.println("Turma: " + turma.getCodigo() +
+                        " - Período: " + turma.getPeriodo() +
+                        " - Curso: " + curso.getNome() +
+                        " - Professor: " + curso.getProfessor().getNome());
+            }
+        }
+
+        //Alunos em turmas matriculadas
+        List<Aluno> alunos = new ArrayList<>();
+        alunos.add(a1);
+        alunos.add(a2);
+        alunos.add(a3);
+        alunos.add(a4);
+        alunos.add(a5);
+
+        for (Aluno aluno : alunos) {
+            System.out.println("\nAluno: " + aluno.getNome() + " (Matrícula: " + aluno.getMatricula() + ")");
+            System.out.print("Matriculado em: ");
+            List<Matricula> matriculas = aluno.getMatriculas();
+            for (int i = 0; i < matriculas.size(); i++) {
+                Turma turma = matriculas.get(i).getTurma();
+                System.out.print(turma.getCodigo());
+                if (i < matriculas.size() - 1) System.out.print(", ");
+            }
+            System.out.println("\n");
+        }
+
+        //Avaliações de turmas
+        List<Turma> todasAsTurmas = new ArrayList<>();
+        todasAsTurmas.add(turma1);
+        todasAsTurmas.add(turma2);
+
+        System.out.println("\nAvaliações por Turma:");
+        for (Turma turma : todasAsTurmas) {
+            System.out.println("Turma: " + turma.getCodigo() + " - Curso: " + turma.getCurso().getNome());
+            for (Avaliacao avaliacao : turma.getAvaliacoes()) {
+                System.out.println("  - Tipo: " + avaliacao.getTipo() +
+                        " | Nota Máxima: " + avaliacao.getNotaMaxima() +
+                        " | Peso: " + avaliacao.getPeso());
+            }
+            System.out.println();
+        }
+
+        //Submissões de alunos
+        System.out.println("📤 Submissões por Avaliação:");
+        for (Avaliacao avaliacao : turma1.getAvaliacoes()) {
+            System.out.println("Avaliação: " + avaliacao.getTipo() + " (Turma: " + turma1.getCodigo() + ")");
+            for (Submissao sub : avaliacao.getSubmissoes()) {
+                System.out.println("  - Aluno: " + sub.getAluno().getNome() +
+                        " | Nota: " + sub.getNota() +
+                        " | Data: " + sub.getDataEntrega() +
+                        " | Observações: " + sub.getObservacoes());
+            }
+            System.out.println();
+        }
+
+
+        // Geração de relatório de desempenho e todos os alunos matriculados
+        System.out.println("\nRelatório de " + a2.getNome() + " na turma " + turma1.getCodigo());
+        RelatorioDesempenho.gerarRelatorio(a2, turma1);
+        System.out.println("\nRelatório de " + a1.getNome() + " na turma " + turma2.getCodigo());
         RelatorioDesempenho.gerarRelatorio(a1, turma2);
+
     }
 }

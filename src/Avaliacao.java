@@ -6,7 +6,7 @@ public class Avaliacao {
     private double notaMaxima;
     private double peso;
     private Turma turma;
-    private List<Submissao> submissões;
+    private List<Submissao> submissoes;
 
     public void setNotaMaxima(double notaMaxima) {
         this.notaMaxima = notaMaxima;
@@ -20,8 +20,8 @@ public class Avaliacao {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public void setSubmissões(List<Submissao> submissões) {
-        this.submissões = submissões;
+    public void setSubmissoes(List<Submissao> submissoes) {
+        this.submissoes = submissoes;
     }
 
     public String getTipo() {
@@ -36,8 +36,8 @@ public class Avaliacao {
     public Turma getTurma() {
         return this.turma;
     }
-    public List<Submissao> getSubmissões() {
-        return this.submissões;
+    public List<Submissao> getSubmissoes() {
+        return this.submissoes;
     }
 
     public Avaliacao(String tipo, double notaMaxima, double peso, Turma turma) {
@@ -45,11 +45,11 @@ public class Avaliacao {
         this.notaMaxima = notaMaxima;
         this.peso = peso;
         this.turma = turma;
-        this.submissões = new ArrayList<>();
+        this.submissoes = new ArrayList<>();
         turma.adicionarAvaliacao(this);
     }
 
     public void adicionarSubmissao(Submissao s) {
-        submissões.add(s);
+        submissoes.add(s);
     }
 }
